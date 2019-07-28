@@ -1,0 +1,6 @@
+[
+{"symbol": "MSFT", "timestamp": "2018-08-24 15:59:00", "priceData": {"open": "108.3700", "high": "108.4700", "low": "108.3400", "close": "108.4200", "volume": "491979"}}, 
+{"symbol": "ADBE", "timestamp": "2018-08-24 15:59:00", "priceData": {"open": "261.3800", "high": "261.4500", "low": "261.2000", "close": "261.3000", "volume": "97552"}}, 
+{"symbol": "GOOGL", "timestamp": "2018-08-24 15:59:00", "priceData": {"open": "1236.9100", "high": "1236.9100", "low": "1236.3101", "close": "1236.6150", "volume": "31170"}}, 
+{"symbol": "FB", "timestamp": "2018-08-24 15:59:00", "priceData": {"open": "174.6800", "high": "174.6900", "low": "174.6200", "close": "174.6600", "volume": "221121"}}
+]
