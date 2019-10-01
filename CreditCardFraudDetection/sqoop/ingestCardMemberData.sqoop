@@ -1,0 +1,2 @@
+sqoop job --create GetCardMember -- import --connect jdbc:mysql://upgradawsrds.cpclxrkdvwmz.us-east-1.rds.amazonaws.com:3306/cred_financials_data --username upgraduser --password upgraduser --table card_member --incremental lastmodified --hive-database default --hive-table card_member --null-string 'NA' --null-non-string '\\N' --merge-key card_id --check-column member_joining_dt --fields-terminated-by ',' --target-dir /input/data/tables/card_member
+

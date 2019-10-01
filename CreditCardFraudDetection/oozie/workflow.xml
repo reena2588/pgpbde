@@ -1,0 +1,55 @@
+<workflow-app name="capstone_project" xmlns="uri:oozie:workflow:0.4">
+	<start to="fork_node"/>		
+		<fork name = "fork_node">
+		      <path start = "sqoopjob_getCardMember"/>
+		      <path start = "sqoopjob_getMemberScore"/>
+   		</fork>
+		<action name="sqoopjob_getCardMember">
+	        	<sqoop xmlns="uri:oozie:sqoop-action:0.2">
+		    		<job-tracker>${jobTracker}</job-tracker>
+		    		<name-node>${nameNode}</name-node>
+		    		<job-xml>sqoop-site.xml</job-xml>	    			
+				<command>job --exec GetCardMember --meta-connect jdbc:hsqldb:hsql://quickstart.cloudera:16000/sqoop -- --password upgraduser</command>
+       			</sqoop>
+        		<ok to="join_node"/>
+        		<error to="kill"/>
+		</action>
+		<action name="sqoopjob_getMemberScore">
+	        	<sqoop xmlns="uri:oozie:sqoop-action:0.2">
+		    		<job-tracker>${jobTracker}</job-tracker>
+		    		<name-node>${nameNode}</name-node>
+				<prepare>
+		                	<delete path="/input/data/tables/member_score"/>
+		                </prepare>	    			
+				<command>job --exec GetMemberScore --meta-connect jdbc:hsqldb:hsql://quickstart.cloudera:16000/sqoop -- --password upgraduser</command>
+       			</sqoop>
+        		<ok to="join_node"/>
+        		<error to="kill"/>
+		</action>		
+		<join name = "join_node" to = "hivejob_calculateUCL"/>
+		<action name="hivejob_calculateUCL">
+        		<hive2 xmlns="uri:oozie:hive2-action:0.1">
+            			<job-tracker>${jobTracker}</job-tracker>
+            			<name-node>${nameNode}</name-node>
+				<job-xml>hive-site.xml</job-xml>
+            			<jdbc-url>jdbc:hive2://quickstart.cloudera:10000/default</jdbc-url>
+            			<script>calculate_UCL.sql</script>
+        		</hive2>
+        		<ok to="hivejob_loadLookupTable"/>
+        		<error to="kill"/>
+    		</action>
+		<action name="hivejob_loadLookupTable">
+        		<hive2 xmlns="uri:oozie:hive2-action:0.1">
+            			<job-tracker>${jobTracker}</job-tracker>
+            			<name-node>${nameNode}</name-node>
+            			<jdbc-url>jdbc:hive2://quickstart.cloudera:10000/default</jdbc-url>
+            			<script>load_lookup.sql</script>
+        		</hive2>
+        		<ok to="finish"/>
+        		<error to="kill"/>
+    		</action>
+		<kill name="kill">
+			<message>The action has failed. Error Message: [${wf:errorMessage(wf:lastErrorNode())}]</message>
+		</kill>
+	<end name="finish"/>
+</workflow-app>

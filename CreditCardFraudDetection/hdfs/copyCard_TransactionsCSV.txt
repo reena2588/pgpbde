@@ -1,0 +1,1 @@
+hdfs dfs -copyFromLocal /home/cloudera/Desktop/card_transactions.csv /user/hive/card_transactions.csv
