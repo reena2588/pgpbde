@@ -1,0 +1,4 @@
+sudo su hdfs
+hdfs dfs -mkdir -p /input/data/tables
+hdfs dfs -chown -R root:supergroup /input/data/tables
+hadoop dfs -chmod -R 777 /input/data/tables

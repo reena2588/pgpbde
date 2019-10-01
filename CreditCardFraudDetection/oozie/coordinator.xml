@@ -1,0 +1,13 @@
+<coordinator-app xmlns = "uri:oozie:coordinator:0.2" name ="capstone_project" frequency = "240" start = "2018-12-08T16:00Z" end = "2020-12-31T00:00Z" timezone = "UTC">   
+   <controls>
+      <timeout>1</timeout>
+      <concurrency>1</concurrency>
+      <execution>FIFO</execution>
+      <throttle>1</throttle>
+   </controls>   
+   <action>
+      <workflow>
+         <app-path>${workflowpath}</app-path>
+      </workflow>
+   </action>
+</coordinator-app>

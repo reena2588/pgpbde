@@ -1,0 +1,1 @@
+sqoop job --create GetMemberScore -- import --connect jdbc:mysql://upgradawsrds.cpclxrkdvwmz.us-east-1.rds.amazonaws.com:3306/cred_financials_data --username upgraduser --password upgraduser --table member_score --hive-database default --hive-table member_score --null-string 'NA' --null-non-string '\\N' --fields-terminated-by ',' --target-dir /input/data/tables/member_score
