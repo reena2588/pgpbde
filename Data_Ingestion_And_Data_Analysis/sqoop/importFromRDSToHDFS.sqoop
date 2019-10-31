@@ -1,0 +1,1 @@
+sqoop import –connect jdbc:mysql://upgradawsrds.cpclxrkdvwmz.us-east-1.rds.amazonaws.com:3306/indiaahs2012_13 --username upgraduser –password upgraduser --table Key_indicator_districtwise --null-string 'NA' --null-non-string '\\N' --warehouse-dir India_Annual_Health_Survey_2012_13

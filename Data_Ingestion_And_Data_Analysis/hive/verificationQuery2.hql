@@ -1,0 +1,1 @@
+SELECT ID, State_Name, State_District_Name, AA_Sample_Units_Total, AA_Sample_Units_Rural, AA_Sample_Units_Urban, AA_Households_Total, AA_Households_Rural FROM india_annual_health_survey_2012_13_db.iahs_2012_13 LIMIT 10;
